@@ -16,8 +16,8 @@
 package org.openrewrite.java.reactor;
 
 import org.junit.jupiter.api.Test;
+import org.openrewrite.DocumentExample;
 import org.openrewrite.InMemoryExecutionContext;
-import org.openrewrite.config.Environment;
 import org.openrewrite.java.JavaParser;
 import org.openrewrite.test.RecipeSpec;
 import org.openrewrite.test.RewriteTest;
@@ -30,14 +30,12 @@ class ReactorFluxPublishNextToShareNextTest implements RewriteTest {
     public void defaults(RecipeSpec spec) {
         spec
           .parser(JavaParser.fromJavaVersion()
-            .classpathFromResources(new InMemoryExecutionContext(), "reactor-core-3.4.39"))
-          .recipe(Environment.builder()
-            .scanRuntimeClasspath("org.openrewrite.java.reactor")
-            .build()
-            .activateRecipes("org.openrewrite.java.reactor.deprecations"));
+            .classpathFromResources(new InMemoryExecutionContext(), "reactor-core-3.4", "reactive-streams"))
+          .recipeFromResources("org.openrewrite.java.reactor.deprecations");
     }
 
     @Test
+    @DocumentExample
     void avoidDuplicateAnnotations() {
         rewriteRun(
           //language=java
@@ -47,9 +45,7 @@ class ReactorFluxPublishNextToShareNextTest implements RewriteTest {
               import reactor.core.publisher.Mono;
 
               class TestClass {
-
-                  void create(){
-                      Flux<String> flux = Flux.just("a", "b", "c");
+                  void create(Flux<String> flux) {
                       Mono<String> mono = flux.publishNext();
                   }
               }
@@ -59,9 +55,7 @@ class ReactorFluxPublishNextToShareNextTest implements RewriteTest {
               import reactor.core.publisher.Mono;
 
               class TestClass {
-
-                  void create(){
-                      Flux<String> flux = Flux.just("a", "b", "c");
+                  void create(Flux<String> flux) {
                       Mono<String> mono = flux.shareNext();
                   }
               }

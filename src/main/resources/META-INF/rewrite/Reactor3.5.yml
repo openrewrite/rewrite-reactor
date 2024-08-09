@@ -38,4 +38,4 @@ recipeList:
 #      newMethodName: share()
   - org.openrewrite.java.ChangeMethodName:
       methodPattern: reactor.core.publisher.Flux publishNext()
-      newMethodName: shareNext()
+      newMethodName: shareNext

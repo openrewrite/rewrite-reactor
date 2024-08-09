@@ -31,7 +31,7 @@ class ReactorFluxPublishNextToShareNextTest implements RewriteTest {
         spec
           .parser(JavaParser.fromJavaVersion()
             .classpathFromResources(new InMemoryExecutionContext(), "reactor-core-3.4", "reactive-streams"))
-          .recipeFromResources("org.openrewrite.java.reactor.deprecations");
+          .recipeFromResources("org.openrewrite.reactive.reactor.UpgradeReactor_3_5");
     }
 
     @Test

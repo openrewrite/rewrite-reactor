@@ -15,7 +15,7 @@
 #
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: org.openrewrite.java.reactor.UpgradeReactor_3_5
+name: org.openrewrite.reactive.reactor.UpgradeReactor_3_5
 displayName: Migrate to Reactor 3.5
 description: Adopt to [breaking changes in Reactor 3.5](https://projectreactor.io/docs/core/3.4.26/api/deprecated-list.html).
 tags:

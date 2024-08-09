@@ -1,0 +1,41 @@
+#
+# Copyright 2024 the original author or authors.
+# <p>
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# <p>
+# https://www.apache.org/licenses/LICENSE-2.0
+# <p>
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.openrewrite.java.reactor.deprecations
+displayName: Reactor 3.5 deprecations migration
+description: Recipes to migrate to reactor >=3.5.
+tags:
+  - reactor
+recipeList:
+#  - org.openrewrite.java.ChangeType:
+#      oldFullyQualifiedTypeName: reactor.core.publisher.MonoProcessor
+#      newFullyQualifiedTypeName: reactor.core.publisher.Sinks
+#  - org.openrewrite.java.ChangeMethodName:
+#      methodPattern: reactor.core.publisher.publisher create()
+#      newMethodName: one()
+#  - org.openrewrite.java.ChangeMethodName:
+#      methodPattern: reactor.core.publisher.MonoSink currentContext()
+#      newMethodName: contextView()
+#  - org.openrewrite.java.ChangeMethodName:
+#      methodPattern: reactor.core.publisher.Flux deferWithContext(..)
+#      newMethodName: deferContextual(..)
+#  - org.openrewrite.java.ChangeMethodName:
+#      methodPattern: reactor.core.publisher.Mono toProcessor()
+#      newMethodName: share()
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: reactor.core.publisher.Flux publishNext()
+      newMethodName: shareNext()

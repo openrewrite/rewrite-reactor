@@ -22,6 +22,8 @@ dependencies {
     testImplementation("org.openrewrite:rewrite-maven")
 
     testImplementation("org.junit.jupiter:junit-jupiter-engine:latest.release")
+
+    testImplementation("io.projectreactor:reactor-core:3.4.39")
 }
 
 recipeDependencies {

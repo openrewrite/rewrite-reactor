@@ -1,4 +1,4 @@
-rootProject.name = "rewrite-reactor"
+rootProject.name = "rewrite-reactive-streams"
 
 plugins {
     id("com.gradle.enterprise") version "latest.release"

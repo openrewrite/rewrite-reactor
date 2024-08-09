@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "org.openrewrite.recipe"
-description = "Reactor Migration"
+description = "Reactive Streams Migration"
 
 val rewriteVersion = rewriteRecipe.rewriteVersion.get()
 dependencies {
@@ -25,6 +25,6 @@ dependencies {
 }
 
 recipeDependencies {
-    parserClasspath("io.projectreactor:reactor-core:3.4.39")
     parserClasspath("org.reactivestreams:reactive-streams:1.0.4")
+    parserClasspath("io.projectreactor:reactor-core:3.4.39")
 }

@@ -15,9 +15,9 @@
 #
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: org.openrewrite.java.reactor.deprecations
-displayName: Reactor 3.5 deprecations migration
-description: Recipes to migrate to reactor >=3.5.
+name: org.openrewrite.java.reactor.UpgradeReactor_3_5
+displayName: Migrate to Reactor 3.5
+description: Adopt to [breaking changes in Reactor 3.5](https://projectreactor.io/docs/core/3.4.26/api/deprecated-list.html).
 tags:
   - reactor
 recipeList:
@@ -26,16 +26,16 @@ recipeList:
 #      newFullyQualifiedTypeName: reactor.core.publisher.Sinks
 #  - org.openrewrite.java.ChangeMethodName:
 #      methodPattern: reactor.core.publisher.publisher create()
-#      newMethodName: one()
+#      newMethodName: one
 #  - org.openrewrite.java.ChangeMethodName:
 #      methodPattern: reactor.core.publisher.MonoSink currentContext()
-#      newMethodName: contextView()
+#      newMethodName: contextView
 #  - org.openrewrite.java.ChangeMethodName:
 #      methodPattern: reactor.core.publisher.Flux deferWithContext(..)
-#      newMethodName: deferContextual(..)
+#      newMethodName: deferContextual
 #  - org.openrewrite.java.ChangeMethodName:
 #      methodPattern: reactor.core.publisher.Mono toProcessor()
-#      newMethodName: share()
+#      newMethodName: share
   - org.openrewrite.java.ChangeMethodName:
       methodPattern: reactor.core.publisher.Flux publishNext()
       newMethodName: shareNext

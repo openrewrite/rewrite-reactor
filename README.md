@@ -1,5 +1,5 @@
 ![Logo](https://github.com/openrewrite/rewrite/raw/main/doc/logo-oss.png)
-### Migrate Reactor projects. Automatically.
+### Migrate Reactive Streams projects. Automatically.
 
 [![ci](https://github.com/openrewrite/rewrite-reactor/actions/workflows/ci.yml/badge.svg)](https://github.com/openrewrite/rewrite-reactor/actions/workflows/ci.yml)
 [![Apache 2.0](https://img.shields.io/github/license/openrewrite/rewrite-reactor.svg)](https://www.reactor.org/licenses/LICENSE-2.0)
@@ -8,9 +8,9 @@
 
 ### What is this?
 
-This project implements a [Rewrite module](https://github.com/openrewrite/rewrite) that performs common tasks for Reactor.
+This project implements a [Rewrite module](https://github.com/openrewrite/rewrite) that performs common tasks for Reactive Streams.
 
-Browse [a selection of recipes available through this module in the recipe catalog](https://docs.openrewrite.org/recipes/java/reactor).
+Browse [a selection of recipes available through this module in the recipe catalog](https://docs.openrewrite.org/recipes/reactive).
 
 ## Contributing
 

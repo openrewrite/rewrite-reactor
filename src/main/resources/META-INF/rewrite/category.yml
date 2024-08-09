@@ -17,6 +17,6 @@
 ---
 type: specs.openrewrite.org/v1beta/category
 name: Reactor
-packageName: org.openrewrite.java.reactor
+packageName: org.openrewrite.reactive.reactor
 description: Recipes to perform [Reactor](https://projectreactor.io/) migration tasks.
 ---

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.openrewrite.java.reactor;
+package org.openrewrite.reactive.reactor;
 
 import org.junit.jupiter.api.Test;
 import org.openrewrite.DocumentExample;
@@ -31,7 +31,7 @@ class ReactorFluxPublishNextToShareNextTest implements RewriteTest {
         spec
           .parser(JavaParser.fromJavaVersion()
             .classpathFromResources(new InMemoryExecutionContext(), "reactor-core-3.4", "reactive-streams"))
-          .recipeFromResources("org.openrewrite.java.reactor.deprecations");
+          .recipeFromResources("org.openrewrite.reactive.reactor.UpgradeReactor_3_5");
     }
 
     @Test

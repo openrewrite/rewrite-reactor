@@ -17,6 +17,8 @@ dependencies {
         exclude("com.google.auto.service", "auto-service-annotations")
     }
 
+    runtimeOnly("tech.picnic.error-prone-support:error-prone-contrib:latest.release:recipes")
+
     testImplementation("org.openrewrite:rewrite-java-17")
     testImplementation("org.openrewrite:rewrite-test")
     testImplementation("org.openrewrite:rewrite-maven")
@@ -27,4 +29,5 @@ dependencies {
 recipeDependencies {
     parserClasspath("org.reactivestreams:reactive-streams:1.0.4")
     parserClasspath("io.projectreactor:reactor-core:3.4.39")
+    parserClasspath("io.projectreactor:reactor-test:3.4.39")
 }

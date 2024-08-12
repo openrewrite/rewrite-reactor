@@ -44,7 +44,6 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
     class ReactorCurrentContextToContextViewTest {
 
         @Test
-        @DocumentExample
         void currentContextToCurrentView() {
             rewriteRun(
               //language=java
@@ -120,7 +119,6 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
     class ReactorFirstToFirstWithSignalTest {
 
         @Test
-        @DocumentExample
         void firstToFirstWithSignal() {
             rewriteRun(
               //language=java
@@ -162,7 +160,6 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
     class ReactorFluxLimitRequestToTakeTest {
 
         @Test
-        @DocumentExample
         void limitRequestToTake() {
             rewriteRun(
               //language=java
@@ -194,7 +191,6 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
     class ReactorFluxPublishNextToShareNextTest {
 
         @Test
-        @DocumentExample
         void publishNextToShareNext() {
             rewriteRun(
               //language=java
@@ -228,7 +224,6 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
     class ReactorSchedulersElasticToBoundedElasticTest {
 
         @Test
-        @DocumentExample
         void elasticToBoundedElastic() {
             rewriteRun(
               //language=java
@@ -360,5 +355,4 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
             );
         }
     }
-
 }

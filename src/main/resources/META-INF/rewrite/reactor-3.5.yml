@@ -23,7 +23,7 @@ tags:
 recipeList:
   - org.openrewrite.java.dependencies.UpgradeDependencyVersion:
       groupId: io.projectreactor
-      artifactId: reactor-core
+      artifactId: reactor-*
       newVersion: 3.5.x
   - org.openrewrite.reactive.reactor.ReactorProcessorCreateToSinkRecipes
   - org.openrewrite.reactive.reactor.ReactorProcessorCacheToSinkRecipes

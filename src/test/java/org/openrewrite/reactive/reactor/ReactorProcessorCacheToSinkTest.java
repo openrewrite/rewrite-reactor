@@ -24,43 +24,44 @@ import org.openrewrite.test.RewriteTest;
 
 import static org.openrewrite.java.Assertions.java;
 
-class ReactorFluxPublishNextToShareNextTest implements RewriteTest {
+class ReactorProcessorCacheToSinkTest implements RewriteTest {
 
     @Override
     public void defaults(RecipeSpec spec) {
         spec
           .parser(JavaParser.fromJavaVersion()
             .classpathFromResources(new InMemoryExecutionContext(), "reactor-core-3.4", "reactive-streams"))
-          .recipeFromResources("org.openrewrite.reactive.reactor.UpgradeReactor_3_5");
+          .recipe(new ReactorProcessorCacheToSinkRecipes());
     }
 
     @Test
     @DocumentExample
-    void avoidDuplicateAnnotations() {
+    void processorCacheLast() {
         rewriteRun(
           //language=java
           java(
             """
-              import reactor.core.publisher.Flux;
-              import reactor.core.publisher.Mono;
+              import reactor.core.publisher.ReplayProcessor;
 
               class TestClass {
-                  void create(Flux<String> flux) {
-                      Mono<String> mono = flux.publishNext();
+                  void cache(Object value) {
+                      ReplayProcessor.cacheLast();
+                      ReplayProcessor.cacheLastOrDefault(value);
                   }
               }
               """,
             """
-              import reactor.core.publisher.Flux;
-              import reactor.core.publisher.Mono;
+              import reactor.core.publisher.Sinks;
 
               class TestClass {
-                  void create(Flux<String> flux) {
-                      Mono<String> mono = flux.shareNext();
+                  void cache(Object value) {
+                      Sinks.many().replay().latest();
+                      Sinks.many().replay().latestOrDefault(value);
                   }
               }
               """
           )
         );
     }
+
 }

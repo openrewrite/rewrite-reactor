@@ -16,6 +16,7 @@ dependencies {
     compileOnly("com.google.errorprone:error_prone_core:2.19.1") {
         exclude("com.google.auto.service", "auto-service-annotations")
     }
+    implementation("io.projectreactor:reactor-core:latest.release")
 
     testImplementation("org.openrewrite:rewrite-java-17")
     testImplementation("org.openrewrite:rewrite-test")

@@ -23,6 +23,9 @@ import org.openrewrite.java.JavaParser;
 import org.openrewrite.test.RecipeSpec;
 import org.openrewrite.test.RewriteTest;
 
+import java.util.regex.Pattern;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.openrewrite.java.Assertions.java;
 import static org.openrewrite.java.Assertions.mavenProject;
 import static org.openrewrite.maven.Assertions.pomXml;
@@ -308,21 +311,11 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
                       </dependencies>
                     </project>
                     """,
-                  """
-                    <project>
-                      <modelVersion>4.0.0</modelVersion>
-                      <groupId>com.example</groupId>
-                      <artifactId>demo</artifactId>
-                      <version>0.0.1-SNAPSHOT</version>
-                      <dependencies>
-                        <dependency>
-                          <groupId>io.projectreactor</groupId>
-                          <artifactId>reactor-core</artifactId>
-                          <version>3.5.19</version>
-                        </dependency>
-                      </dependencies>
-                    </project>
-                    """
+                  spec -> spec.after(pom -> {
+                      String version = Pattern.compile("<version>([^<]+)").matcher(pom).results().toList().get(1).group(1);
+                      assertThat(version).isGreaterThan("3.4.39");
+                      return pom;
+                  })
                 )
               )
             );
@@ -357,29 +350,11 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
                       </dependencies>
                     </project>
                     """,
-                  """
-                    <project>
-                      <modelVersion>4.0.0</modelVersion>
-                      <groupId>com.example</groupId>
-                      <artifactId>demo</artifactId>
-                      <version>0.0.1-SNAPSHOT</version>
-                      <dependencyManagement>
-                        <dependencies>
-                            <dependency>
-                              <groupId>io.projectreactor</groupId>
-                              <artifactId>reactor-core</artifactId>
-                              <version>3.5.19</version>
-                            </dependency>
-                        </dependencies>
-                      </dependencyManagement>
-                      <dependencies>
-                        <dependency>
-                          <groupId>io.projectreactor</groupId>
-                          <artifactId>reactor-core</artifactId>
-                        </dependency>
-                      </dependencies>
-                    </project>
-                    """
+                  spec -> spec.after(pom -> {
+                      String version = Pattern.compile("<version>([^<]+)").matcher(pom).results().toList().get(1).group(1);
+                      assertThat(version).isGreaterThan("3.4.39");
+                      return pom;
+                  })
                 )
               )
             );

@@ -24,13 +24,7 @@ recipeList:
   - org.openrewrite.reactive.reactor.ReactorProcessorCreateToSinkRecipes
   - org.openrewrite.reactive.reactor.ReactorProcessorCacheToSinkRecipes
   - org.openrewrite.java.ChangeMethodName:
-      methodPattern: reactor.core.publisher.MonoSink currentContext()
-      newMethodName: contextView
-  - org.openrewrite.java.ChangeMethodName:
-      methodPattern: reactor.core.publisher.FluxSink currentContext()
-      newMethodName: contextView
-  - org.openrewrite.java.ChangeMethodName:
-      methodPattern: reactor.core.publisher.SynchronousSink currentContext()
+      methodPattern: reactor.core.publisher.*Sink currentContext()
       newMethodName: contextView
   - org.openrewrite.java.ChangeMethodName:
       methodPattern: reactor.core.publisher.Flux deferWithContext(..)

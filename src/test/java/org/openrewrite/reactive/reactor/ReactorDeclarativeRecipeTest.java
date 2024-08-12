@@ -25,7 +25,7 @@ import org.openrewrite.test.RewriteTest;
 
 import static org.openrewrite.java.Assertions.java;
 
-public class ReactorDeclarativeRecipeTest implements RewriteTest {
+class ReactorDeclarativeRecipeTest implements RewriteTest {
 
     @Override
     public void defaults(RecipeSpec spec) {

@@ -27,7 +27,10 @@ import java.time.Duration;
 import java.util.Queue;
 import java.util.function.Consumer;
 
-
+@RecipeDescriptor(
+        name = "Replace various `Processor.create` calls with their `Sinks` equivalent",
+        description = "As of 3.5 Processors are deprecated and Sinks are preferred."
+)
 public class ReactorProcessorCreateToSink {
 
     @RecipeDescriptor(

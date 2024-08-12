@@ -21,7 +21,10 @@ import org.openrewrite.java.template.RecipeDescriptor;
 import reactor.core.publisher.ReplayProcessor;
 import reactor.core.publisher.Sinks;
 
-
+@RecipeDescriptor(
+        name = "Replace various `Processor.cache` calls with their `Sinks` equivalent",
+        description = "As of 3.5 Processors are deprecated and Sinks are preferred."
+)
 public class ReactorProcessorCacheToSink {
 
     @RecipeDescriptor(

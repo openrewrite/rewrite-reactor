@@ -44,35 +44,8 @@ class ReactorProcessorCacheToSinkTest implements RewriteTest {
               import reactor.core.publisher.ReplayProcessor;
 
               class TestClass {
-                  void cache() {
-                      ReplayProcessor.cacheLast();
-                  }
-              }
-              """,
-            """
-              import reactor.core.publisher.Sinks;
-
-              class TestClass {
-                  void cache() {
-                      Sinks.many().replay().latest();
-                  }
-              }
-              """
-          )
-        );
-    }
-
-    @Test
-    @DocumentExample
-    void processorCacheLastOrDefault() {
-        rewriteRun(
-          //language=java
-          java(
-            """
-              import reactor.core.publisher.ReplayProcessor;
-
-              class TestClass {
                   void cache(Object value) {
+                      ReplayProcessor.cacheLast();
                       ReplayProcessor.cacheLastOrDefault(value);
                   }
               }
@@ -82,6 +55,7 @@ class ReactorProcessorCacheToSinkTest implements RewriteTest {
 
               class TestClass {
                   void cache(Object value) {
+                      Sinks.many().replay().latest();
                       Sinks.many().replay().latestOrDefault(value);
                   }
               }

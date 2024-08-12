@@ -53,7 +53,7 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
                   import reactor.core.publisher.MonoSink;
                   import reactor.core.publisher.FluxSink;
                   import reactor.core.publisher.SynchronousSink;
-                  
+
                   class TestClass {
                       void create(MonoSink<String> mono, FluxSink<String> flux, SynchronousSink<String> sync) {
                           mono.currentContext();
@@ -66,7 +66,7 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
                   import reactor.core.publisher.MonoSink;
                   import reactor.core.publisher.FluxSink;
                   import reactor.core.publisher.SynchronousSink;
-                  
+
                   class TestClass {
                       void create(MonoSink<String> mono, FluxSink<String> flux, SynchronousSink<String> sync) {
                           mono.contextView();
@@ -92,7 +92,7 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
                 """
                   import reactor.core.publisher.Mono;
                   import reactor.core.publisher.Flux;
-                  
+
                   class TestClass {
                       void create(String s) {
                           Mono.deferWithContext(ctx -> Mono.just(s));
@@ -103,7 +103,7 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
                 """
                   import reactor.core.publisher.Mono;
                   import reactor.core.publisher.Flux;
-                  
+
                   class TestClass {
                       void create(String s) {
                           Mono.deferContextual(ctx -> Mono.just(s));
@@ -129,7 +129,7 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
                   import org.reactivestreams.Publisher;
                   import reactor.core.publisher.Flux;
                   import reactor.core.publisher.Mono;
-                  
+
                   class TestClass {
                       void first(Iterable iterable, Mono<String> mono, Publisher<String> publisher) {
                           Flux.first(iterable);
@@ -143,7 +143,7 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
                   import org.reactivestreams.Publisher;
                   import reactor.core.publisher.Flux;
                   import reactor.core.publisher.Mono;
-                  
+
                   class TestClass {
                       void first(Iterable iterable, Mono<String> mono, Publisher<String> publisher) {
                           Flux.firstWithSignal(iterable);
@@ -169,7 +169,7 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
               java(
                 """
                   import reactor.core.publisher.Flux;
-                  
+
                   class TestClass {
                       void getContext(Flux<String> flux, Long limit) {
                           flux.limitRequest(limit);
@@ -178,7 +178,7 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
                   """,
                 """
                   import reactor.core.publisher.Flux;
-                  
+
                   class TestClass {
                       void getContext(Flux<String> flux, Long limit) {
                           flux.take(limit);
@@ -202,7 +202,7 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
                 """
                   import reactor.core.publisher.Flux;
                   import reactor.core.publisher.Mono;
-                  
+
                   class TestClass {
                       void create(Flux<String> flux) {
                           Mono<String> mono = flux.publishNext();
@@ -212,7 +212,7 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
                 """
                   import reactor.core.publisher.Flux;
                   import reactor.core.publisher.Mono;
-                  
+
                   class TestClass {
                       void create(Flux<String> flux) {
                           Mono<String> mono = flux.shareNext();
@@ -235,7 +235,7 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
               java(
                 """
                   import reactor.core.scheduler.Schedulers;
-                  
+
                   class TestClass {
                       void elastic() {
                           Schedulers.elastic();
@@ -244,7 +244,7 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
                   """,
                 """
                   import reactor.core.scheduler.Schedulers;
-                  
+
                   class TestClass {
                       void elastic() {
                           Schedulers.boundedElastic();
@@ -267,7 +267,7 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
               java(
                 """
                   import reactor.core.publisher.Signal;
-                  
+
                   class TestClass {
                       void getContext(Signal<String> signal) {
                           signal.getContext();
@@ -276,7 +276,7 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
                   """,
                 """
                   import reactor.core.publisher.Signal;
-                  
+
                   class TestClass {
                       void getContext(Signal<String> signal) {
                           signal.getContextView();

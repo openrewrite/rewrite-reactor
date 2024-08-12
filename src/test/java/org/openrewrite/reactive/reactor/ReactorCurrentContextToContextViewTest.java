@@ -24,7 +24,7 @@ import org.openrewrite.test.RewriteTest;
 
 import static org.openrewrite.java.Assertions.java;
 
-class ReactorFluxPublishNextToShareNextTest implements RewriteTest {
+class ReactorCurrentContextToContextViewTest implements RewriteTest {
 
     @Override
     public void defaults(RecipeSpec spec) {
@@ -36,27 +36,33 @@ class ReactorFluxPublishNextToShareNextTest implements RewriteTest {
 
     @Test
     @DocumentExample
-    void publishNextToShareNext() {
+    void currentContextToCurrentView() {
         rewriteRun(
           //language=java
           java(
             """
-              import reactor.core.publisher.Flux;
-              import reactor.core.publisher.Mono;
+              import reactor.core.publisher.MonoSink;
+              import reactor.core.publisher.FluxSink;
+              import reactor.core.publisher.SynchronousSink;
 
               class TestClass {
-                  void create(Flux<String> flux) {
-                      Mono<String> mono = flux.publishNext();
+                  void create(MonoSink<String> mono, FluxSink<String> flux, SynchronousSink<String> sync) {
+                      mono.currentContext();
+                      flux.currentContext();
+                      sync.currentContext();
                   }
               }
               """,
             """
-              import reactor.core.publisher.Flux;
-              import reactor.core.publisher.Mono;
+              import reactor.core.publisher.MonoSink;
+              import reactor.core.publisher.FluxSink;
+              import reactor.core.publisher.SynchronousSink;
 
               class TestClass {
-                  void create(Flux<String> flux) {
-                      Mono<String> mono = flux.shareNext();
+                  void create(MonoSink<String> mono, FluxSink<String> flux, SynchronousSink<String> sync) {
+                      mono.contextView();
+                      flux.contextView();
+                      sync.contextView();
                   }
               }
               """

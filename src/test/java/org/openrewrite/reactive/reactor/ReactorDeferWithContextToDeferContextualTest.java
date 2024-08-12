@@ -24,7 +24,7 @@ import org.openrewrite.test.RewriteTest;
 
 import static org.openrewrite.java.Assertions.java;
 
-class ReactorFluxPublishNextToShareNextTest implements RewriteTest {
+class ReactorDeferWithContextToDeferContextualTest implements RewriteTest {
 
     @Override
     public void defaults(RecipeSpec spec) {
@@ -36,27 +36,29 @@ class ReactorFluxPublishNextToShareNextTest implements RewriteTest {
 
     @Test
     @DocumentExample
-    void publishNextToShareNext() {
+    void currentContextToCurrentView() {
         rewriteRun(
           //language=java
           java(
             """
-              import reactor.core.publisher.Flux;
               import reactor.core.publisher.Mono;
+              import reactor.core.publisher.Flux;
 
               class TestClass {
-                  void create(Flux<String> flux) {
-                      Mono<String> mono = flux.publishNext();
+                  void create(String s) {
+                      Mono.deferWithContext(ctx -> Mono.just(s));
+                      Flux.deferWithContext(ctx -> Flux.just(s));
                   }
               }
               """,
             """
-              import reactor.core.publisher.Flux;
               import reactor.core.publisher.Mono;
+              import reactor.core.publisher.Flux;
 
               class TestClass {
-                  void create(Flux<String> flux) {
-                      Mono<String> mono = flux.shareNext();
+                  void create(String s) {
+                      Mono.deferContextual(ctx -> Mono.just(s));
+                      Flux.deferContextual(ctx -> Flux.just(s));
                   }
               }
               """

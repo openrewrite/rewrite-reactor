@@ -24,14 +24,14 @@ import org.openrewrite.test.RewriteTest;
 
 import static org.openrewrite.java.Assertions.java;
 
-class ReactorProcessorToSinkTest implements RewriteTest {
+class ReactorProcessorCreateToSinkTest implements RewriteTest {
 
     @Override
     public void defaults(RecipeSpec spec) {
         spec
           .parser(JavaParser.fromJavaVersion()
             .classpathFromResources(new InMemoryExecutionContext(), "reactor-core-3.4", "reactive-streams"))
-          .recipe(new ReactorProcessorToSinkRecipes());
+          .recipe(new ReactorProcessorCreateToSinkRecipes());
     }
 
     @Test

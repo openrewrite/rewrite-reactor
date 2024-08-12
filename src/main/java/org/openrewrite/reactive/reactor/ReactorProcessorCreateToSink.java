@@ -28,7 +28,7 @@ import java.util.Queue;
 import java.util.function.Consumer;
 
 
-public class ReactorProcessorToSink {
+public class ReactorProcessorCreateToSink {
 
     @RecipeDescriptor(
             name = "Replace `MonoProcessor.create()` with `Sinks.one()`",

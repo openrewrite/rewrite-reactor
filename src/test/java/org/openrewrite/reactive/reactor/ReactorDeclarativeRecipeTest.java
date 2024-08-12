@@ -23,7 +23,12 @@ import org.openrewrite.java.JavaParser;
 import org.openrewrite.test.RecipeSpec;
 import org.openrewrite.test.RewriteTest;
 
+import java.util.regex.Pattern;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.openrewrite.java.Assertions.java;
+import static org.openrewrite.java.Assertions.mavenProject;
+import static org.openrewrite.maven.Assertions.pomXml;
 
 class ReactorDeclarativeRecipeTest implements RewriteTest {
 
@@ -39,7 +44,6 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
     class ReactorCurrentContextToContextViewTest {
 
         @Test
-        @DocumentExample
         void currentContextToCurrentView() {
             rewriteRun(
               //language=java
@@ -115,7 +119,6 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
     class ReactorFirstToFirstWithSignalTest {
 
         @Test
-        @DocumentExample
         void firstToFirstWithSignal() {
             rewriteRun(
               //language=java
@@ -157,7 +160,6 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
     class ReactorFluxLimitRequestToTakeTest {
 
         @Test
-        @DocumentExample
         void limitRequestToTake() {
             rewriteRun(
               //language=java
@@ -189,7 +191,6 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
     class ReactorFluxPublishNextToShareNextTest {
 
         @Test
-        @DocumentExample
         void publishNextToShareNext() {
             rewriteRun(
               //language=java
@@ -223,7 +224,6 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
     class ReactorSchedulersElasticToBoundedElasticTest {
 
         @Test
-        @DocumentExample
         void elasticToBoundedElastic() {
             rewriteRun(
               //language=java
@@ -283,4 +283,76 @@ class ReactorDeclarativeRecipeTest implements RewriteTest {
         }
     }
 
+    @Nested
+    class ReactorDependencyUpgradeTest {
+        @Test
+        void shouldUpdateMavenDependency() {
+            rewriteRun(
+              mavenProject("project",
+                //language=xml
+                pomXml(
+                  """
+                    <project>
+                      <modelVersion>4.0.0</modelVersion>
+                      <groupId>com.example</groupId>
+                      <artifactId>demo</artifactId>
+                      <version>0.0.1-SNAPSHOT</version>
+                      <dependencies>
+                        <dependency>
+                          <groupId>io.projectreactor</groupId>
+                          <artifactId>reactor-core</artifactId>
+                          <version>3.4.39</version>
+                        </dependency>
+                      </dependencies>
+                    </project>
+                    """,
+                  spec -> spec.after(pom -> {
+                      String version = Pattern.compile("<version>([^<]+)").matcher(pom).results().toList().get(1).group(1);
+                      assertThat(version).isGreaterThan("3.4.39");
+                      return pom;
+                  })
+                )
+              )
+            );
+        }
+
+        @Test
+        void shouldUpdateManagedMavenDependency() {
+            rewriteRun(
+              mavenProject("project",
+                //language=xml
+                pomXml(
+                  """
+                    <project>
+                      <modelVersion>4.0.0</modelVersion>
+                      <groupId>com.example</groupId>
+                      <artifactId>demo</artifactId>
+                      <version>0.0.1-SNAPSHOT</version>
+                      <dependencyManagement>
+                        <dependencies>
+                            <dependency>
+                              <groupId>io.projectreactor</groupId>
+                              <artifactId>reactor-core</artifactId>
+                              <version>3.4.39</version>
+                            </dependency>
+                        </dependencies>
+                      </dependencyManagement>
+                      <dependencies>
+                        <dependency>
+                          <groupId>io.projectreactor</groupId>
+                          <artifactId>reactor-core</artifactId>
+                        </dependency>
+                      </dependencies>
+                    </project>
+                    """,
+                  spec -> spec.after(pom -> {
+                      String version = Pattern.compile("<version>([^<]+)").matcher(pom).results().toList().get(1).group(1);
+                      assertThat(version).isGreaterThan("3.4.39");
+                      return pom;
+                  })
+                )
+              )
+            );
+        }
+    }
 }

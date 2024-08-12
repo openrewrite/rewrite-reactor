@@ -21,6 +21,10 @@ description: Adopt to [breaking changes in Reactor 3.5](https://projectreactor.i
 tags:
   - reactor
 recipeList:
+  - org.openrewrite.java.dependencies.UpgradeDependencyVersion:
+      groupId: io.projectreactor
+      artifactId: reactor-*
+      newVersion: 3.5.x
   - org.openrewrite.reactive.reactor.ReactorProcessorCreateToSinkRecipes
   - org.openrewrite.reactive.reactor.ReactorProcessorCacheToSinkRecipes
   - org.openrewrite.java.ChangeMethodName:

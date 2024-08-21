@@ -16,6 +16,7 @@ dependencies {
     compileOnly("com.google.errorprone:error_prone_core:2.19.1") {
         exclude("com.google.auto.service", "auto-service-annotations")
     }
+    implementation("io.projectreactor:reactor-core:latest.release")
 
     runtimeOnly("tech.picnic.error-prone-support:error-prone-contrib:latest.release:recipes")
 

@@ -1,9 +1,9 @@
 ![Logo](https://github.com/openrewrite/rewrite/raw/main/doc/logo-oss.png)
 ### Migrate Reactive Streams projects. Automatically.
 
-[![ci](https://github.com/openrewrite/rewrite-reactor/actions/workflows/ci.yml/badge.svg)](https://github.com/openrewrite/rewrite-reactor/actions/workflows/ci.yml)
-[![Apache 2.0](https://img.shields.io/github/license/openrewrite/rewrite-reactor.svg)](https://www.reactor.org/licenses/LICENSE-2.0)
-[![Maven Central](https://img.shields.io/maven-central/v/org.openrewrite.recipe/rewrite-reactor.svg)](https://mvnrepository.com/artifact/org.openrewrite.recipe/rewrite-reactor)
+[![ci](https://github.com/openrewrite/rewrite-reactive-streams/actions/workflows/ci.yml/badge.svg)](https://github.com/openrewrite/rewrite-reactive-streams/actions/workflows/ci.yml)
+[![Apache 2.0](https://img.shields.io/github/license/openrewrite/rewrite-reactive-streams.svg)](https://www.reactor.org/licenses/LICENSE-2.0)
+[![Maven Central](https://img.shields.io/maven-central/v/org.openrewrite.recipe/rewrite-reactive-streams.svg)](https://mvnrepository.com/artifact/org.openrewrite.recipe/rewrite-reactive-streams)
 [![Revved up by Develocity](https://img.shields.io/badge/Revved%20up%20by-Develocity-06A0CE?logo=Gradle&labelColor=02303A)](https://ge.openrewrite.org/scans)
 
 ### What is this?

@@ -30,21 +30,36 @@ description: Adopt to [breaking changes in Reactor 3.5](https://projectreactor.i
 tags:
   - reactor
 recipeList:
-#  - org.openrewrite.java.ChangeType:
-#      oldFullyQualifiedTypeName: reactor.core.publisher.MonoProcessor
-#      newFullyQualifiedTypeName: reactor.core.publisher.Sinks
-#  - org.openrewrite.java.ChangeMethodName:
-#      methodPattern: reactor.core.publisher.publisher create()
-#      newMethodName: one
-#  - org.openrewrite.java.ChangeMethodName:
-#      methodPattern: reactor.core.publisher.MonoSink currentContext()
-#      newMethodName: contextView
-#  - org.openrewrite.java.ChangeMethodName:
-#      methodPattern: reactor.core.publisher.Flux deferWithContext(..)
-#      newMethodName: deferContextual
-#  - org.openrewrite.java.ChangeMethodName:
-#      methodPattern: reactor.core.publisher.Mono toProcessor()
-#      newMethodName: share
+  - org.openrewrite.java.dependencies.UpgradeDependencyVersion:
+      groupId: io.projectreactor
+      artifactId: reactor-*
+      newVersion: 3.5.x
+  - org.openrewrite.reactive.reactor.ReactorProcessorCreateToSinkRecipes
+  - org.openrewrite.reactive.reactor.ReactorProcessorCacheToSinkRecipes
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: reactor.core.publisher.*Sink currentContext()
+      newMethodName: contextView
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: reactor.core.publisher.Flux deferWithContext(..)
+      newMethodName: deferContextual
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: reactor.core.publisher.Mono deferWithContext(..)
+      newMethodName: deferContextual
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: reactor.core.scheduler.Schedulers elastic()
+      newMethodName: boundedElastic
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: reactor.core.publisher.Mono first(..)
+      newMethodName: firstWithSignal
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: reactor.core.publisher.Flux first(..)
+      newMethodName: firstWithSignal
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: reactor.core.publisher.Signal getContext()
+      newMethodName: getContextView
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: reactor.core.publisher.Flux limitRequest(..)
+      newMethodName: take
   - org.openrewrite.java.ChangeMethodName:
       methodPattern: reactor.core.publisher.Flux publishNext()
       newMethodName: shareNext
